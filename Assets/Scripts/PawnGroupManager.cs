@@ -11,6 +11,7 @@ public class PawnGroupManager : MonoBehaviour
     private void Start()
     {
         InitializeCharacters();
+        SelectLeader(2);
     }
     private void Update()
     {
@@ -43,16 +44,12 @@ public class PawnGroupManager : MonoBehaviour
     public void SelectLeader(int characterIndex)
     {
         leader = pawnCharacters[characterIndex];
+        cam.GetComponent<CameraController>().SetTarget(leader.gameObject);
     }
 
     public void SetDestination(Vector3 destination)
     {
         this.destination = destination;
         leader.MoveTo(destination);
-    }
-
-    public void MoveCharacters()
-    {
-
     }
 }

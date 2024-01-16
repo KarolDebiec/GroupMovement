@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public GameObject objectToFollow;
+    public Vector3 offset;
     void Update()
     {
-        
+        transform.position = objectToFollow.transform.position + offset;
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        objectToFollow = target;
     }
 }
