@@ -8,7 +8,10 @@ public class PawnGroupManager : MonoBehaviour
     public PawnCharacter leader;
     public Vector3 destination;
     public Camera cam;
-
+    private void Start()
+    {
+        InitializeCharacters();
+    }
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -18,8 +21,7 @@ public class PawnGroupManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit))
             {
-                leader.navMeshAgent.SetDestination(hit.point);
-                Debug.Log(hit.point);
+                SetDestination(hit.point);
             }
         }
         foreach (PawnCharacter pawn in pawnCharacters)
@@ -45,7 +47,8 @@ public class PawnGroupManager : MonoBehaviour
 
     public void SetDestination(Vector3 destination)
     {
-
+        this.destination = destination;
+        leader.MoveTo(destination);
     }
 
     public void MoveCharacters()
