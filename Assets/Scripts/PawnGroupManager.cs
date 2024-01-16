@@ -18,14 +18,24 @@ public class PawnGroupManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit))
             {
-                pawnCharacters[0].navMeshAgent.SetDestination(hit.point);
+                leader.navMeshAgent.SetDestination(hit.point);
                 Debug.Log(hit.point);
+            }
+        }
+        foreach (PawnCharacter pawn in pawnCharacters)
+        {
+            if(pawn != leader)
+            {
+                pawn.Follow(leader);
             }
         }
     }
     public void InitializeCharacters()
     {
-
+        foreach (PawnCharacter pawn in pawnCharacters)
+        {
+            pawn.GenerateRandomAttributes();
+        }
     }
 
     public void SelectLeader(int characterIndex)

@@ -804,11 +804,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawnCharacters:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  leader: {fileID: 0}
+  - {fileID: 182935314}
+  - {fileID: 1137801554}
+  - {fileID: 2093354388}
+  leader: {fileID: 182935314}
   destination: {x: 0, y: 0, z: 0}
+  cam: {fileID: 963194227}
 --- !u!4 &1418760387
 Transform:
   m_ObjectHideFlags: 0

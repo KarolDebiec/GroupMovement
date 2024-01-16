@@ -13,7 +13,7 @@ public class PawnCharacter : MonoBehaviour
 
     public void MoveTo(Vector3 destination)
     {
-
+        navMeshAgent.SetDestination(destination);
     }
     public void GenerateRandomAttributes()
     {
@@ -23,6 +23,16 @@ public class PawnCharacter : MonoBehaviour
 
     public void Follow(PawnCharacter leader)
     {
-
+        float distance = Vector3.Distance(transform.position, leader.transform.position); // calculate the distance to the group leader
+        if(distance > 1.1f)
+        {
+            navMeshAgent.isStopped = false;
+            MoveTo(leader.gameObject.transform.position);
+        }
+        else
+        {
+            navMeshAgent.isStopped = true;
+        }
+        
     }
 }
