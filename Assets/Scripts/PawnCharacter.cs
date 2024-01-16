@@ -9,40 +9,39 @@ public class PawnCharacter : MonoBehaviour
     public float maxStamina;
     public float stamina;
     public NavMeshAgent navMeshAgent;
-    public bool isLeader;
     private void Start()
     {
         navMeshAgent.isStopped = true;
     }
     private void Update()
     {
-        if(navMeshAgent.remainingDistance <= 0.1f)
+        if(navMeshAgent.remainingDistance <= 0.1f) // when close to the destination pawn stops
         {
             navMeshAgent.isStopped = true;
         }
-        if(!navMeshAgent.isStopped && stamina > 0)
+        if(!navMeshAgent.isStopped && stamina > 0) // if pawn is moving and has positive stamina the he loses stamina in time
         {
             stamina -= Time.deltaTime;
         }
-        else if(navMeshAgent.isStopped && stamina <= maxStamina)
+        else if(navMeshAgent.isStopped && stamina <= maxStamina) // if pawn is stopped and has less than maximum stamina then he regenerates the stamina in time
         {
             stamina += Time.deltaTime;
         }
-        if(stamina <= 0)
+        if(stamina <= 0) // if pawn has no stamina then his max speed is halfed
         {
             navMeshAgent.speed = speed/2;
         }
-        else
+        else // if pawn has remaining stamina then his max speed has its original value
         {
             navMeshAgent.speed = speed;
         }
     }
-    public void MoveTo(Vector3 destination)
+    public void MoveTo(Vector3 destination) //commands the pawn to move to the destination
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(destination);
     }
-    public void GenerateRandomAttributes()
+    public void GenerateRandomAttributes() //generates random values to the pawns attributes 
     {
         speed = Random.Range(3.0f, 5.0f);
         navMeshAgent.speed = speed;
@@ -52,15 +51,15 @@ public class PawnCharacter : MonoBehaviour
         stamina = maxStamina;
     }
 
-    public void Follow(PawnCharacter leader)
+    public void Follow(PawnCharacter leader) //commands the pawn to follow the leader of the group
     {
         float distance = Vector3.Distance(transform.position, leader.transform.position); // calculate the distance to the group leader
-        if(distance > 1.1f)
+        if(distance > 1.1f) // if the pawn is too far from the leader then he follows the leader
         {
             navMeshAgent.isStopped = false;
             MoveTo(leader.gameObject.transform.position);
         }
-        else
+        else // if withing the set range then the movement stops
         {
             navMeshAgent.isStopped = true;
         }

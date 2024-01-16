@@ -8,10 +8,10 @@ public class CameraController : MonoBehaviour
     public Vector3 offset;
     void Update()
     {
-        transform.position = objectToFollow.transform.position + offset;
+        transform.position = objectToFollow.transform.position + offset; // follows the target with given offset
     }
 
-    public void SetTarget(GameObject target)
+    public void SetTarget(GameObject target) // sets the cameras target to follow
     {
         objectToFollow = target;
     }

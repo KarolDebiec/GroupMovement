@@ -6,12 +6,11 @@ public class PawnGroupManager : MonoBehaviour
 {
     public List<PawnCharacter> pawnCharacters;
     public PawnCharacter leader;
-    public Vector3 destination;
     public Camera cam;
-    private void Start()
+    private void Start() 
     {
         InitializeCharacters();
-        SelectLeader(2);
+        SelectLeader(0);
     }
     private void Update()
     {
@@ -25,7 +24,7 @@ public class PawnGroupManager : MonoBehaviour
                 SetDestination(hit.point);
             }
         }
-        foreach (PawnCharacter pawn in pawnCharacters)
+        foreach (PawnCharacter pawn in pawnCharacters) // if the pawn is not a leader then follow a leader
         {
             if(pawn != leader)
             {
@@ -33,7 +32,7 @@ public class PawnGroupManager : MonoBehaviour
             }
         }
     }
-    public void InitializeCharacters()
+    private void InitializeCharacters() // initialize all pawns in the pawnCharacters list
     {
         foreach (PawnCharacter pawn in pawnCharacters)
         {
@@ -41,15 +40,14 @@ public class PawnGroupManager : MonoBehaviour
         }
     }
 
-    public void SelectLeader(int characterIndex)
+    public void SelectLeader(int characterIndex) // selects leader from the pawnCharacters list using their position in the list
     {
         leader = pawnCharacters[characterIndex];
         cam.GetComponent<CameraController>().SetTarget(leader.gameObject);
     }
 
-    public void SetDestination(Vector3 destination)
+    private void SetDestination(Vector3 destination) // sets destination for the pawn group
     {
-        this.destination = destination;
         leader.MoveTo(destination);
     }
 }
